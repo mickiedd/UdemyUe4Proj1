@@ -2,6 +2,7 @@
 
 
 #include "PositionReport.h"
+#include "Gameframework/Actor.h"
 
 // Sets default values for this component's properties
 UPositionReport::UPositionReport()
@@ -20,6 +21,9 @@ void UPositionReport::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+
+	FString ObjectName =  GetOwner()->GetName();
+	UE_LOG(LogTemp, Error, TEXT("Oh what is this for %s"), *ObjectName);
 	
 }
 
@@ -30,5 +34,7 @@ void UPositionReport::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+	FString ObjectName = GetOwner()->GetName();
+	UE_LOG(LogTemp, Error, TEXT("Oh what is this for %s"), *ObjectName);
 }
 
