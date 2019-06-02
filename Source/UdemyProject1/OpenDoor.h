@@ -21,6 +21,8 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	void CloseDoor();
+
 	void OpenDoor();
 
 public:	
@@ -28,10 +30,13 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	float OpenAngle = 90.0f;
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 	UPROPERTY(EditAnywhere)
 	AActor* ActorThatOpens;
+	UPROPERTY(EditAnywhere)
+	float DoorDelayTime = 3.f;
+	float DoorLastOpenTime = 0.f;
 };
