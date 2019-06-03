@@ -37,7 +37,7 @@ void UOpenDoor::CloseDoor()
 	Owner->SetActorRotation(NewRotation);
 
 	// Print something
-	UE_LOG(LogTemp, Error, TEXT("Oh the door is closed."));
+	//UE_LOG(LogTemp, Error, TEXT("Oh the door is closed."));
 }
 
 void UOpenDoor::OpenDoor()
@@ -52,7 +52,7 @@ void UOpenDoor::OpenDoor()
 	Owner->SetActorRotation(NewRotation);
 
 	// Print something
-	UE_LOG(LogTemp, Error, TEXT("Oh the door is opened."));
+	//UE_LOG(LogTemp, Error, TEXT("Oh the door is opened."));
 }
 
 
