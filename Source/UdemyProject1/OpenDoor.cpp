@@ -25,9 +25,9 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
-
-	GetTotalMassOfActorsOnPlate();
+	if (ActorThatOpens) {
+		ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
+	}
 }
 
 void UOpenDoor::CloseDoor()
@@ -47,17 +47,8 @@ void UOpenDoor::CloseDoor()
 
 void UOpenDoor::OpenDoor()
 {
-	// Find the owning Actor
-	AActor* Owner = GetOwner();
-
-	// Create a rotator
-	FRotator NewRotation = FRotator(0.f, OpenAngle, 0.f);
-
-	// Set the door rotation
-	Owner->SetActorRotation(NewRotation);
-
-	// Print something
-	//UE_LOG(LogTemp, Error, TEXT("Oh the door is opened."));
+	OnOpenRequest.Broadcast();
+	UE_LOG(LogTemp, Error, TEXT("Open Door Event Sent."));
 }
 
 
@@ -82,10 +73,12 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate()
 	float TotalMass = 0.f;
 
 	TArray<AActor*> OverLappingActors;
-	PressurePlate->GetOverlappingActors(OUT OverLappingActors);
-	for (auto& one : OverLappingActors) {
-		TotalMass += one->FindComponentByClass<UPrimitiveComponent>()->GetMass();
-		UE_LOG(LogTemp, Error, TEXT("%s"), *one->GetName());
+	if (PressurePlate) {
+		PressurePlate->GetOverlappingActors(OUT OverLappingActors);
+		for (auto& one : OverLappingActors) {
+			TotalMass += one->FindComponentByClass<UPrimitiveComponent>()->GetMass();
+			UE_LOG(LogTemp, Error, TEXT("%s"), *one->GetName());
+		}
 	}
 	return TotalMass;
 }
