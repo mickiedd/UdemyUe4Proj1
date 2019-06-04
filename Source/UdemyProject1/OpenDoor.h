@@ -39,4 +39,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	float DoorDelayTime = 3.f;
 	float DoorLastOpenTime = 0.f;
+
+	float GetTotalMassOfActorsOnPlate();
 };
